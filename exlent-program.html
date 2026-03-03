@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>ExLENT Program – University of Tennessee, Knoxville</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+      <style>
+         :root {
+         --ut-orange: #FF8200;
+         --ut-orange-dark: #d96d00;
+         --ut-orange-light: #ffaa50;
+         --smoky: #1a1a1a;
+         --smoky-mid: #3a3a3a;
+         --smoky-light: #58595B;
+         --warm-white: #fdfaf6;
+         --off-white: #f4f0ea;
+         --text-dark: #1a1a1a;
+         --text-mid: #444;
+         --text-light: #777;
+         --border: #e8e0d5;
+         }
+         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+         html { scroll-behavior: smooth; }
+         body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--text-dark); overflow-x: hidden; }
+         /* TOP BAR */
+         .topbar { background: var(--smoky); color: rgba(255,255,255,0.7); font-size: 0.75rem; padding: 6px 40px; display: flex; justify-content: space-between; align-items: center; letter-spacing: 0.04em; }
+         .topbar a { color: var(--ut-orange); text-decoration: none; }
+         /* NAV */
+         nav { background: var(--smoky); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--ut-orange); box-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+         .nav-brand { display: flex; align-items: center; gap: 14px; padding: 14px 0; text-decoration: none; }
+         .nav-logo-box { width: 42px; height: 42px; background: var(--ut-orange); display: flex; align-items: center; justify-content: center; font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.1rem; color: white; clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%); }
+         .nav-title-group { display: flex; flex-direction: column; }
+         .nav-title-main { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 600; color: white; letter-spacing: 0.05em; line-height: 1; }
+         .nav-title-sub { font-size: 0.65rem; color: rgba(255,255,255,0.55); letter-spacing: 0.08em; text-transform: uppercase; }
+         .nav-links { display: flex; list-style: none; gap: 4px; }
+         .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.82rem; font-weight: 500; padding: 8px 14px; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s, background 0.2s; border-radius: 2px; }
+         .nav-links a:hover { color: white; background: rgba(255,130,0,0.15); }
+         .nav-cta { background: var(--ut-orange) !important; color: white !important; padding: 8px 18px !important; border-radius: 2px !important; }
+         .nav-cta:hover { background: var(--ut-orange-dark) !important; }
+         /* HERO */
+         .hero { position: relative; min-height: 92vh; background: var(--smoky); overflow: hidden; display: flex; align-items: center; }
+         .hero-bg-pattern { position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,130,0,0.03) 0px, rgba(255,130,0,0.03) 1px, transparent 1px, transparent 40px), repeating-linear-gradient(-45deg, rgba(255,130,0,0.03) 0px, rgba(255,130,0,0.03) 1px, transparent 1px, transparent 40px); }
+         .hero-glow { position: absolute; top: -100px; right: -100px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(255,130,0,0.12) 0%, transparent 65%); animation: pulse 6s ease-in-out infinite; }
+         @keyframes pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.7; } }
+         .hero-circuit { position: absolute; right: 0; top: 0; width: 50%; height: 100%; opacity: 0.07; background-image: linear-gradient(rgba(255,130,0,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,130,0,1) 1px, transparent 1px); background-size: 60px 60px; }
+         .hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 80px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+         .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,130,0,0.12); border: 1px solid rgba(255,130,0,0.3); border-radius: 2px; padding: 6px 16px; font-size: 0.75rem; color: var(--ut-orange); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 24px; font-weight: 500; }
+         .hero-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--ut-orange); border-radius: 50%; animation: blink 2s infinite; }
+         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+         .hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; color: white; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 10px; }
+         .hero h1 .accent { color: var(--ut-orange); }
+         .hero-subtitle { font-family: 'Source Serif 4', serif; font-size: 1.15rem; color: rgba(255,255,255,0.65); line-height: 1.65; margin: 20px 0 36px; font-style: italic; }
+         .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+         .btn-primary { background: var(--ut-orange); color: white; padding: 14px 32px; font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%); transition: background 0.2s, transform 0.15s; display: inline-block; }
+         .btn-primary:hover { background: var(--ut-orange-dark); transform: translateY(-2px); }
+         .btn-outline { background: transparent; color: white; padding: 13px 32px; font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.35); transition: border-color 0.2s, background 0.2s; display: inline-block; }
+         .btn-outline:hover { border-color: var(--ut-orange); background: rgba(255,130,0,0.08); }
+         .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 50px; }
+         .hero-stat { text-align: center; padding: 20px 10px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); backdrop-filter: blur(4px); }
+         .hero-stat-num { font-family: 'Oswald', sans-serif; font-size: 2rem; color: var(--ut-orange); font-weight: 700; line-height: 1; }
+         .hero-stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+         .hero-right { position: relative; display: flex; align-items: center; }
+         .hero-card-stack { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+         .hero-card {
+         background: rgba(255,255,255,0.04); border: 1px solid rgba(255,130,0,0.2);
+         backdrop-filter: blur(10px); padding: 22px 24px; border-radius: 2px;
+         transition: transform 0.25s, border-color 0.25s, background 0.25s;
+         display: flex; align-items: flex-start; gap: 16px;
+         }
+         .hero-card:nth-child(2) { border-color: rgba(255,130,0,0.45); background: rgba(255,130,0,0.05); margin-left: 20px; }
+         .hero-card:nth-child(3) { margin-left: 40px; }
+         .hero-card:hover { transform: translateX(-6px); border-color: var(--ut-orange); background: rgba(255,130,0,0.08); }
+         .hero-card-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+         .hero-card-title { font-family: 'Oswald', sans-serif; color: white; font-size: 1rem; letter-spacing: 0.03em; margin-bottom: 5px; }
+         .hero-card-text { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+         /* SECTIONS */
+         section { position: relative; }
+         .section-inner { max-width: 1200px; margin: 0 auto; padding: 90px 40px; }
+         .section-label { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ut-orange); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+         .section-label::before { content: ''; width: 28px; height: 2px; background: var(--ut-orange); }
+         h2 { font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 600; line-height: 1.1; color: var(--smoky); margin-bottom: 16px; }
+         .section-lead { font-family: 'Source Serif 4', serif; font-size: 1.1rem; color: var(--text-mid); line-height: 1.7; max-width: 700px; }
+         /* ABOUT */
+         #about { background: var(--warm-white); }
+         .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 70px; align-items: center; margin-top: 50px; }
+         .about-text p { font-size: 1rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 18px; }
+         .about-text strong { color: var(--ut-orange); }
+         .about-pillars { display: flex; flex-direction: column; gap: 16px; }
+         .pillar { display: flex; gap: 18px; align-items: flex-start; padding: 20px; background: white; border: 1px solid var(--border); border-left: 4px solid var(--ut-orange); transition: box-shadow 0.2s, transform 0.2s; }
+         .pillar:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
+         .pillar-icon { font-size: 1.4rem; flex-shrink: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,130,0,0.08); border-radius: 2px; }
+         .pillar h4 { font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 0.04em; color: var(--smoky); margin-bottom: 4px; }
+         .pillar p { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; }
+         /* AUDIENCE TABS */
+         #audience { background: var(--smoky); }
+         #audience h2 { color: white; }
+         #audience .section-lead { color: rgba(255,255,255,0.65); }
+         .tab-controls { display: flex; gap: 0; margin: 40px 0 0; border-bottom: 2px solid rgba(255,255,255,0.1); }
+         .tab-btn { background: none; border: none; cursor: pointer; padding: 14px 32px; font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.45); position: relative; transition: color 0.2s; }
+         .tab-btn::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--ut-orange); transform: scaleX(0); transition: transform 0.2s; }
+         .tab-btn.active { color: white; }
+         .tab-btn.active::after { transform: scaleX(1); }
+         .tab-panel { display: none; }
+         .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+         .tab-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 50px 0; align-items: start; }
+         .tab-left h3 { font-family: 'Oswald', sans-serif; color: var(--ut-orange); font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 16px; }
+         .tab-left p { color: rgba(255,255,255,0.7); line-height: 1.7; font-size: 0.97rem; margin-bottom: 14px; }
+         .feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+         .feature-list li { display: flex; align-items: flex-start; gap: 12px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5; }
+         .feature-list li::before { content: '▸'; color: var(--ut-orange); font-size: 0.75rem; margin-top: 3px; flex-shrink: 0; }
+         .tab-right-cards { display: flex; flex-direction: column; gap: 14px; }
+         .tab-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 22px; display: flex; gap: 16px; align-items: flex-start; transition: background 0.2s, border-color 0.2s; }
+         .tab-card:hover { background: rgba(255,130,0,0.06); border-color: rgba(255,130,0,0.25); }
+         .tab-card-num { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: rgba(255,130,0,0.25); font-weight: 700; line-height: 1; flex-shrink: 0; width: 40px; }
+         .tab-card h4 { font-family: 'Oswald', sans-serif; color: white; font-size: 0.95rem; letter-spacing: 0.04em; margin-bottom: 5px; }
+         .tab-card p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+         /* IMPACT */
+         #impact { background: var(--off-white); }
+         .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+         .impact-card { background: white; border: 1px solid var(--border); padding: 36px 28px; text-align: center; position: relative; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+         .impact-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--ut-orange); }
+         .impact-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-4px); }
+         .impact-num { font-family: 'Oswald', sans-serif; font-size: 3.5rem; font-weight: 700; color: var(--ut-orange); line-height: 1; margin-bottom: 8px; }
+         .impact-num sup { font-size: 1.5rem; vertical-align: super; }
+         .impact-label { font-family: 'Oswald', sans-serif; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--smoky); margin-bottom: 10px; }
+         .impact-desc { font-size: 0.82rem; color: var(--text-light); line-height: 1.5; }
+         /* KITS */
+         #kits { background: white; }
+         .kits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+         .kit-card { border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; }
+         .kit-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.1); transform: translateY(-4px); }
+         .kit-card-header { padding: 28px 28px 20px; background: var(--smoky); position: relative; }
+         .kit-card.featured .kit-card-header { background: var(--ut-orange); }
+         .kit-badge { display: inline-block; background: var(--ut-orange); color: white; font-family: 'Oswald', sans-serif; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; margin-bottom: 12px; }
+         .kit-card.featured .kit-badge { background: rgba(255,255,255,0.25); }
+         .kit-tier-name { font-family: 'Oswald', sans-serif; color: white; font-size: 1.4rem; letter-spacing: 0.04em; margin-bottom: 8px; }
+         .kit-tier-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+         .kit-card.featured .kit-tier-tagline { color: rgba(255,255,255,0.85); }
+         .kit-card-body { padding: 24px 28px; flex: 1; }
+         .kit-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+         .kit-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: var(--text-mid); line-height: 1.4; }
+         .kit-features li::before { content: '✓'; color: var(--ut-orange); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+         /* GALLERY */
+         #gallery { background: var(--smoky); }
+         #gallery h2 { color: white; }
+         #gallery .section-lead { color: rgba(255,255,255,0.65); }
+         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 50px; }
+         .gallery-item { position: relative; overflow: hidden; aspect-ratio: 4/3; background: var(--smoky-mid); cursor: pointer; }
+         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; filter: grayscale(20%); }
+         .gallery-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
+         .gallery-item-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; display: flex; align-items: flex-end; padding: 18px; }
+         .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+         .gallery-item-label { font-family: 'Oswald', sans-serif; color: white; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+         .gallery-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #252525, #1a1a1a); gap: 8px; transition: background 0.3s; }
+         .gallery-item:hover .gallery-placeholder { background: linear-gradient(135deg, #2f2f2f, #222); }
+         .gallery-placeholder-num { font-family: 'Oswald', sans-serif; font-size: 3rem; font-weight: 700; color: rgba(255,130,0,0.25); line-height: 1; }
+         .gallery-placeholder-icon { font-size: 1.5rem; opacity: 0.3; }
+         .gallery-placeholder-text { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+         .gallery-note { max-width: 1200px; margin: 0 auto; padding: 14px 40px 0; font-size: 0.76rem; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
+         .gallery-note code { color: rgba(255,130,0,0.5); }
+         /* LIGHTBOX */
+         .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; }
+         .lightbox.open { display: flex; }
+         .lightbox-inner { max-width: 880px; width: 90%; position: relative; }
+         .lightbox-close { position: absolute; top: -46px; right: 0; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.6rem; cursor: pointer; transition: color 0.2s; line-height: 1; }
+         .lightbox-close:hover { color: white; }
+         .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,130,0,0.8); border: none; color: white; width: 44px; height: 44px; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; font-family: monospace; }
+         .lightbox-nav:hover { background: var(--ut-orange); }
+         .lightbox-prev { left: -54px; }
+         .lightbox-next { right: -54px; }
+         .lightbox-img { width: 100%; display: block; border: 2px solid rgba(255,130,0,0.3); }
+         .lightbox-ph { width: 100%; aspect-ratio: 4/3; background: #1a1a1a; border: 2px solid rgba(255,130,0,0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+         .lightbox-ph-num { font-family: 'Oswald', sans-serif; font-size: 6rem; color: rgba(255,130,0,0.2); line-height: 1; }
+         .lightbox-ph-text { font-size: 0.78rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.25); text-transform: uppercase; }
+         .lightbox-caption { text-align: center; margin-top: 12px; font-family: 'Oswald', sans-serif; color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+         /* EQUITY */
+         #equity { background: var(--ut-orange); position: relative; overflow: hidden; }
+         #equity::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 40px); }
+         .equity-content { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; }
+         .equity-left h2 { color: white; }
+         .equity-left .section-label { color: rgba(255,255,255,0.8); }
+         .equity-left .section-label::before { background: rgba(255,255,255,0.8); }
+         .equity-left p { color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.75; margin-top: 20px; }
+         .equity-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+         .equity-pillar { background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); padding: 24px 20px; border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s; }
+         .equity-pillar:hover { background: rgba(255,255,255,0.18); }
+         .equity-pillar-icon { font-size: 1.6rem; margin-bottom: 10px; }
+         .equity-pillar h4 { font-family: 'Oswald', sans-serif; color: white; font-size: 0.9rem; letter-spacing: 0.06em; margin-bottom: 6px; }
+         .equity-pillar p { font-size: 0.78rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+         /* TEAM */
+         #team { background: var(--warm-white); }
+         .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; }
+         .team-card { background: white; border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+         .team-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.1); transform: translateY(-4px); }
+         .team-card-top { background: var(--smoky); padding: 32px 24px 24px; position: relative; }
+         .team-card-top::after { content: ''; position: absolute; bottom: 0; left: 24px; width: 40px; height: 3px; background: var(--ut-orange); }
+         .team-initials { width: 64px; height: 64px; background: var(--ut-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Oswald', sans-serif; font-size: 1.4rem; font-weight: 600; color: white; margin-bottom: 14px; }
+         .team-name { font-family: 'Oswald', sans-serif; color: white; font-size: 1.1rem; letter-spacing: 0.04em; }
+         .team-role { font-size: 0.75rem; color: var(--ut-orange); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+         .team-card-body { padding: 20px 24px; }
+         .team-dept { font-size: 0.75rem; color: var(--text-light); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+         .team-contact { font-size: 0.8rem; color: var(--text-light); display: flex; align-items: center; gap: 8px; text-decoration: none; transition: color 0.2s; }
+         .team-contact::before { content: '✉'; font-size: 0.9rem; }
+         .team-contact:hover { color: var(--ut-orange); }
+         /* CONTACT */
+         #contact { background: var(--smoky); }
+         .cta-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: start; }
+         #contact h2 { color: white; }
+         #contact .section-label { color: rgba(255,130,0,0.9); }
+         #contact > .section-inner > .cta-wrap > div > p { color: rgba(255,255,255,0.65); line-height: 1.7; margin-top: 18px; font-size: 0.97rem; }
+         .contact-info-block { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 12px; }
+         .contact-line { display: flex; align-items: flex-start; gap: 12px; }
+         .contact-icon { color: var(--ut-orange); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+         .contact-text { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+         .contact-text a { color: rgba(255,130,0,0.8); text-decoration: none; }
+         .contact-text a:hover { color: var(--ut-orange); text-decoration: underline; }
+         .cta-btns { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+         .cta-card { background: rgba(255,130,0,0.06); border: 1px solid rgba(255,130,0,0.3); padding: 36px; }
+         .cta-card h3 { font-family: 'Oswald', sans-serif; color: var(--ut-orange); font-size: 1.2rem; letter-spacing: 0.05em; margin-bottom: 6px; }
+         .cta-card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 20px; letter-spacing: 0.04em; }
+         .audience-btns { display: flex; flex-direction: column; gap: 10px; }
+         .audience-btn { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: white; text-decoration: none; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; transition: background 0.2s, border-color 0.2s, transform 0.15s; }
+         .audience-btn:hover { background: rgba(255,130,0,0.12); border-color: rgba(255,130,0,0.4); transform: translateX(4px); }
+         .audience-btn .arrow { color: var(--ut-orange); }
+         /* FOOTER */
+         footer { background: #111; padding: 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-top: 3px solid var(--ut-orange); }
+         .footer-left { display: flex; flex-direction: column; gap: 6px; }
+         .footer-logo { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: white; letter-spacing: 0.05em; font-weight: 600; }
+         .footer-logo span { color: var(--ut-orange); }
+         .footer-sub { font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; }
+         .footer-right { font-size: 0.78rem; color: rgba(255,255,255,0.35); text-align: right; line-height: 1.7; }
+         .footer-right a { color: rgba(255,130,0,0.7); text-decoration: none; }
+         /* DIVIDER */
+         .orange-divider { width: 100%; height: 5px; background: linear-gradient(90deg, var(--ut-orange), var(--ut-orange-dark), var(--ut-orange-light), var(--ut-orange)); background-size: 300% 100%; animation: shimmer 4s linear infinite; }
+         @keyframes shimmer { 0% { background-position: 0% 0; } 100% { background-position: 300% 0; } }
+         /* SCROLL REVEAL — always visible, subtle lift animation when observer fires */
+         .reveal { opacity: 1; transform: translateY(0); transition: none; }
+         .reveal-delay-1 { }
+         .reveal-delay-2 { }
+         .reveal-delay-3 { }
+         @media (max-width: 900px) {
+         .hero-content, .about-grid, .kits-grid, .cta-wrap, .equity-content, .tab-content { grid-template-columns: 1fr; }
+         .impact-grid, .team-grid { grid-template-columns: 1fr 1fr; }
+         .gallery-grid { grid-template-columns: 1fr 1fr; }
+         .hero-right { display: none; }
+         nav .nav-links { display: none; }
+         .lightbox-prev { left: -6px; } .lightbox-next { right: -6px; }
+         }
+         @media (max-width: 600px) {
+         .impact-grid, .team-grid, .equity-pillars { grid-template-columns: 1fr; }
+         .section-inner { padding: 60px 24px; }
+         .gallery-grid { grid-template-columns: 1fr 1fr; }
+         }
+      </style>
+   </head>
+   <body>
+      <!-- TOP BAR -->
+      <div class="topbar">
+         <span>University of Tennessee, Knoxville &nbsp;·&nbsp; Tickle College of Engineering</span>
+         <span>📍 East Tennessee &nbsp;·&nbsp; <a href="mailto:maydeniz@utk.edu?subject=ExLENT%20Program%20Inquiry&body=Hello,%0D%0A%0D%0AI%20have%20a%20question%20about%20the%20ExLENT%20program.%0D%0A%0D%0AThank%20you.">Contact Us</a></span>
+      </div>
+      <!-- NAV -->
+      <nav>
+         <a href="#hero" class="nav-brand">
+            <div class="nav-logo-box">EX</div>
+            <div class="nav-title-group">
+               <span class="nav-title-main">ExLENT</span>
+               <span class="nav-title-sub">University of Tennessee, Knoxville</span>
+            </div>
+         </a>
+         <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#audience">Program</a></li>
+            <li><a href="#impact">Impact</a></li>
+            <li><a href="#kits">Equipment</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact" class="nav-cta">Get Involved</a></li>
+         </ul>
+      </nav>
+      <!-- HERO -->
+      <section class="hero" id="hero">
+         <div class="hero-bg-pattern"></div>
+         <div class="hero-glow"></div>
+         <div class="hero-circuit"></div>
+         <div class="hero-content">
+            <div class="hero-left">
+               <div class="hero-eyebrow">UTK · NSF-Supported Program</div>
+               <h1><span class="accent">Ex</span>LENT<br>Program</h1>
+               <p class="hero-subtitle">
+                  Engaging East Tennessee Educators &amp; Students through<br>
+                  Real-World Microelectronics and STEM Career Pathways
+               </p>
+               <div class="hero-actions">
+                  <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="btn-primary">Join the Program</a>
+                  <a href="#about" class="btn-outline">Learn More</a>
+               </div>
+               <div class="hero-stats">
+                  <div class="hero-stat">
+                     <div class="hero-stat-num">50<sup>+</sup></div>
+                     <div class="hero-stat-label">Teachers Trained</div>
+                  </div>
+                  <div class="hero-stat">
+                     <div class="hero-stat-num">30<sup>+</sup></div>
+                     <div class="hero-stat-label">High Schools</div>
+                  </div>
+                  <div class="hero-stat">
+                     <div class="hero-stat-num">3</div>
+                     <div class="hero-stat-label">Kit Tiers</div>
+                  </div>
+               </div>
+            </div>
+            <div class="hero-right">
+               <div class="hero-card-stack">
+                  <div class="hero-card">
+                     <div class="hero-card-icon">⚡</div>
+                     <div>
+                        <div class="hero-card-title">Hands-On Microelectronics</div>
+                        <div class="hero-card-text">Circuit design, programming microcontrollers, and IoT exploration</div>
+                     </div>
+                  </div>
+                  <div class="hero-card">
+                     <div class="hero-card-icon">🎓</div>
+                     <div>
+                        <div class="hero-card-title">Teacher Professional Development</div>
+                        <div class="hero-card-text">Training, curriculum support, and classroom equipment kits</div>
+                     </div>
+                  </div>
+                  <div class="hero-card">
+                     <div class="hero-card-icon">🚀</div>
+                     <div>
+                        <div class="hero-card-title">Career Pathways</div>
+                        <div class="hero-card-text">Connecting students to high-demand, high-wage STEM careers in Tennessee</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <div class="orange-divider"></div>
+      <!-- VIDEO INTRO -->
+      <section style="background:#000;position:relative;overflow:hidden;line-height:0;">
+         <video
+            src="video.mp4"
+            autoplay
+            loop
+            controls
+            playsinline
+            style="width:100%;max-height:70vh;object-fit:contain;display:block;opacity:0.92;"
+            onerror="document.getElementById('video-fallback').style.display='flex'">
+         </video>
+         <!-- Fallback if video file not found -->
+         <div id="video-fallback" style="display:none;width:100%;height:380px;background:var(--smoky);align-items:center;justify-content:center;flex-direction:column;gap:14px;border-bottom:3px solid var(--ut-orange);">
+            <div style="font-size:2.5rem;opacity:0.3;">🎬</div>
+            <div style="font-family:'Oswald',sans-serif;color:rgba(255,255,255,0.3);font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;">Place video.mp4 in the same folder to display video</div>
+         </div>
+         <!-- Bottom gradient fade into hero -->
+         <div style="position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,#1a1a1a);pointer-events:none;"></div>
+         <!-- UTK orange accent bar -->
+         <div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--ut-orange),var(--ut-orange-dark),var(--ut-orange-light),var(--ut-orange));background-size:300% 100%;animation:shimmer 4s linear infinite;"></div>
+      </section>
+      <!-- ABOUT -->
+      <section id="about">
+         <div class="section-inner">
+            <div class="section-label">About the Program</div>
+            <h2>What is ExLENT?</h2>
+            <div class="about-grid">
+               <div class="about-text">
+                  <p><strong>ExLENT</strong> — Engaging East Tennessee Educators in Microelectronics — is a University of Tennessee, Knoxville initiative designed to bridge the gap between the growing demand for microelectronics talent and the lack of access to relevant education in Tennessee's high schools.</p>
+                  <p>ExLENT is not just a curriculum — it's a <strong>pipeline for talent</strong>, a training ground for teachers, and a <strong>launchpad for students</strong> into the future of microelectronics and technology innovation.</p>
+                  <p>Through hands-on classroom kits, structured teacher professional development, and direct student engagement, ExLENT prepares Tennessee's future engineers, innovators, and leaders for high-demand careers in semiconductor and microelectronics industries.</p>
+                  <p>Together, we will ensure every student — regardless of background — has access to the tools and knowledge that will define tomorrow's economy.</p>
+               </div>
+               <div class="about-pillars">
+                  <div class="pillar reveal">
+                     <div class="pillar-icon">📚</div>
+                     <div>
+                        <h4>Curriculum Integration</h4>
+                        <p>Career-connected microelectronics curriculum woven into existing STEM and CTE programs.</p>
+                     </div>
+                  </div>
+                  <div class="pillar reveal reveal-delay-1">
+                     <div class="pillar-icon">🔧</div>
+                     <div>
+                        <h4>Hands-On Kits</h4>
+                        <p>Classroom equipment kits deployed directly to participating schools — from starter to advanced.</p>
+                     </div>
+                  </div>
+                  <div class="pillar reveal reveal-delay-2">
+                     <div class="pillar-icon">👩‍🏫</div>
+                     <div>
+                        <h4>Teacher Empowerment</h4>
+                        <p>Professional development and ongoing UTK support so educators teach with full confidence.</p>
+                     </div>
+                  </div>
+                  <div class="pillar reveal reveal-delay-3">
+                     <div class="pillar-icon">🌐</div>
+                     <div>
+                        <h4>Industry Connection</h4>
+                        <p>Direct pathways to university programs and high-wage careers in Tennessee's tech sector.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- AUDIENCE TABS -->
+      <section id="audience">
+         <div class="section-inner">
+            <div class="section-label">Program Details</div>
+            <h2>Built for Students &amp; Educators</h2>
+            <p class="section-lead">ExLENT offers tailored pathways for every participant in the learning journey.</p>
+            <div class="tab-controls">
+               <button class="tab-btn active" data-tab="students">For Students</button>
+               <button class="tab-btn" data-tab="teachers">For Teachers</button>
+               <button class="tab-btn" data-tab="schools">For Schools</button>
+            </div>
+            <div class="tab-panel active" id="tab-students">
+               <div class="tab-content">
+                  <div class="tab-left">
+                     <h3>Build. Invent. Launch Your Future.</h3>
+                     <p>Microelectronics is one of the fastest-growing industries in the world. Tennessee is at the center of this transformation — and ExLENT puts you at the center of it.</p>
+                     <p>Whether you're into coding, engineering, design, or innovation, microelectronics opens doors to incredible careers.</p>
+                     <ul class="feature-list">
+                        <li>Program microcontrollers and build real working devices</li>
+                        <li>Design IoT devices and sensor-based projects</li>
+                        <li>Learn soldering and circuit assembly fundamentals</li>
+                        <li>Explore robotics and wearable electronics</li>
+                        <li>Connect with UTK engineers and industry professionals</li>
+                        <li>Discover high-wage, high-demand STEM career paths</li>
+                     </ul>
+                  </div>
+                  <div class="tab-right-cards">
+                     <div class="tab-card">
+                        <div class="tab-card-num">01</div>
+                        <div>
+                           <h4>Discover &amp; Explore</h4>
+                           <p>Start with block-based coding and simple circuits. No prior experience required.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">02</div>
+                        <div>
+                           <h4>Build &amp; Prototype</h4>
+                           <p>Advance to intermediate microcontrollers. Build real working devices, sensors, and IoT projects.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">03</div>
+                        <div>
+                           <h4>Innovate &amp; Present</h4>
+                           <p>Design original projects. Explore robotics and advanced electronics for deeper engineering challenges.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">04</div>
+                        <div>
+                           <h4>Launch Your Career</h4>
+                           <p>Connect with UTK faculty, mentors, and industry partners for internships and degree pathways.</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="tab-panel" id="tab-teachers">
+               <div class="tab-content">
+                  <div class="tab-left">
+                     <h3>Bring Microelectronics to Your Classroom.</h3>
+                     <p>Microelectronics is one of the most in-demand fields of the 21st century — and your students deserve access. ExLENT gives you everything you need to teach it confidently.</p>
+                     <p>No prior electronics experience required. UTK trains you, equips your classroom, and supports you every step of the way.</p>
+                     <ul class="feature-list">
+                        <li>Summer professional development training at UTK</li>
+                        <li>Ready-to-use lesson plans and lab activities</li>
+                        <li>Full classroom equipment kit — your school keeps it</li>
+                        <li>Ongoing support from UTK faculty and graduate students</li>
+                        <li>Stipends and continuing education credits</li>
+                        <li>Network of fellow ExLENT educators across East Tennessee</li>
+                     </ul>
+                  </div>
+                  <div class="tab-right-cards">
+                     <div class="tab-card">
+                        <div class="tab-card-num">01</div>
+                        <div>
+                           <h4>Apply &amp; Register</h4>
+                           <p>Reach out to the ExLENT team. No prerequisites — just passion for your students.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">02</div>
+                        <div>
+                           <h4>Summer Training</h4>
+                           <p>Attend hands-on professional development sessions at the University of Tennessee, Knoxville.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">03</div>
+                        <div>
+                           <h4>Receive Your Kit</h4>
+                           <p>Your school receives a classroom equipment kit matched to your program level — yours to keep.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">04</div>
+                        <div>
+                           <h4>Teach &amp; Connect</h4>
+                           <p>Launch the curriculum with ongoing UTK support, guest speakers, and peer educator community.</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="tab-panel" id="tab-schools">
+               <div class="tab-content">
+                  <div class="tab-left">
+                     <h3>Partner With UTK to Empower Your District.</h3>
+                     <p>East Tennessee schools face a critical need: students must be prepared for the microelectronics and semiconductor careers shaping our regional economy.</p>
+                     <p>ExLENT provides a complete, cost-effective pathway to integrate microelectronics into your STEM and CTE programs — with full UTK support.</p>
+                     <ul class="feature-list">
+                        <li>No-cost equipment kits for participating schools</li>
+                        <li>Curriculum aligned to Tennessee academic standards</li>
+                        <li>Support for equity and access initiatives</li>
+                        <li>Measurable outcomes: student STEM interest growth</li>
+                        <li>Partnership with leading UTK research faculty</li>
+                        <li>Advocacy for your district in state and federal conversations</li>
+                     </ul>
+                  </div>
+                  <div class="tab-right-cards">
+                     <div class="tab-card">
+                        <div class="tab-card-num">01</div>
+                        <div>
+                           <h4>Support Curriculum Integration</h4>
+                           <p>Champion microelectronics content within your district's STEM and CTE offerings.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">02</div>
+                        <div>
+                           <h4>Nominate Educators</h4>
+                           <p>Identify passionate teachers to participate in ExLENT training and certification.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">03</div>
+                        <div>
+                           <h4>Expand Participation</h4>
+                           <p>Partner with ExLENT to grow the program's reach across East Tennessee school districts.</p>
+                        </div>
+                     </div>
+                     <div class="tab-card">
+                        <div class="tab-card-num">04</div>
+                        <div>
+                           <h4>Measure Impact</h4>
+                           <p>Track student engagement, STEM interest growth, and career pathway outcomes together.</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- IMPACT -->
+      <section id="impact">
+         <div class="section-inner">
+            <div class="section-label">Program Goals &amp; Metrics</div>
+            <h2>Our Commitment to Impact</h2>
+            <p class="section-lead">ExLENT measures success through concrete outcomes — more teachers trained, more classrooms equipped, more students inspired.</p>
+            <div class="impact-grid">
+               <div class="impact-card reveal">
+                  <div class="impact-num">50<sup>+</sup></div>
+                  <div class="impact-label">Teachers Trained</div>
+                  <div class="impact-desc">Microelectronics professional development for East Tennessee educators across the region.</div>
+               </div>
+               <div class="impact-card reveal reveal-delay-1">
+                  <div class="impact-num">30<sup>+</sup></div>
+                  <div class="impact-label">High Schools Equipped</div>
+                  <div class="impact-desc">Classroom kits deployed to partner schools across East Tennessee.</div>
+               </div>
+               <div class="impact-card reveal reveal-delay-2">
+                  <div class="impact-num">100%</div>
+                  <div class="impact-label">Equity Focus</div>
+                  <div class="impact-desc">Prioritizing access for underrepresented students including women, minorities, and rural learners.</div>
+               </div>
+               <div class="impact-card reveal">
+                  <div class="impact-num">3</div>
+                  <div class="impact-label">Kit Tier Levels</div>
+                  <div class="impact-desc">Starter, Intermediate, and Full kits matched to each school's curriculum readiness level.</div>
+               </div>
+               <div class="impact-card reveal reveal-delay-1">
+                  <div class="impact-num">↑</div>
+                  <div class="impact-label">STEM Interest Growth</div>
+                  <div class="impact-desc">Tracked student engagement and career interest measured before and after ExLENT participation.</div>
+               </div>
+               <div class="impact-card reveal reveal-delay-2">
+                  <div class="impact-num">UTK</div>
+                  <div class="impact-label">University Partnership</div>
+                  <div class="impact-desc">Backed by the University of Tennessee Knoxville's Tickle College of Engineering.</div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- KITS -->
+      <section id="kits">
+         <div class="section-inner">
+            <div class="section-label">Classroom Equipment</div>
+            <h2>Three Tiers of Classroom Kits</h2>
+            <p class="section-lead">ExLENT delivers professionally curated equipment kits directly to participating classrooms — at no cost to the school. Each kit is matched to the teacher's training level and school readiness.</p>
+            <div class="kits-grid">
+               <div class="kit-card reveal">
+                  <div class="kit-card-header">
+                     <div class="kit-badge">Entry Level</div>
+                     <div class="kit-tier-name">Starter Kit</div>
+                     <div class="kit-tier-tagline">Ideal for introducing coding and basic electronics with no prior experience required.</div>
+                  </div>
+                  <div class="kit-card-body">
+                     <ul class="kit-features">
+                        <li>Entry-level microcontroller boards for every student team</li>
+                        <li>Block-based and text-based programming activities</li>
+                        <li>Basic measurement and testing tools</li>
+                        <li>Guided lesson plans and project booklets</li>
+                        <li>UTK teacher training and support included</li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="kit-card featured reveal reveal-delay-1">
+                  <div class="kit-card-header">
+                     <div class="kit-badge">Most Popular</div>
+                     <div class="kit-tier-name">Intermediate Kit</div>
+                     <div class="kit-tier-tagline">A complete hands-on STEM lab experience for classrooms ready to go deeper into electronics.</div>
+                  </div>
+                  <div class="kit-card-body">
+                     <ul class="kit-features">
+                        <li>Intermediate microcontroller and IoT platforms</li>
+                        <li>Sensor arrays for real-world data collection projects</li>
+                        <li>Soldering and analog electronics labs</li>
+                        <li>Shared diagnostic and testing equipment</li>
+                        <li>Consumables, components, and safety supplies</li>
+                        <li>Full curriculum and professional development</li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="kit-card reveal reveal-delay-2">
+                  <div class="kit-card-header">
+                     <div class="kit-badge">Advanced</div>
+                     <div class="kit-tier-name">Full Kit</div>
+                     <div class="kit-tier-tagline">For advanced CTE or honors programs ready for college-level engineering exploration.</div>
+                  </div>
+                  <div class="kit-card-body">
+                     <ul class="kit-features">
+                        <li>All Intermediate kit components included</li>
+                        <li>Robotics platforms for autonomous systems</li>
+                        <li>Wearable electronics and e-textile projects</li>
+                        <li>Programmable logic and advanced development boards</li>
+                        <li>Radio frequency and spectrum analysis tools</li>
+                        <li>Professional-grade lab instruments</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- GALLERY -->
+      <section id="gallery">
+         <div class="section-inner">
+            <div class="section-label">Photo Gallery</div>
+            <h2>ExLENT in Action</h2>
+            <p class="section-lead">A glimpse into our classrooms, workshops, and student experiences across East Tennessee.</p>
+         </div>
+         <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-item" data-index="0">
+               <img src="1.jpg" alt="Photo 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+               <div class="gallery-placeholder" style="display:none">
+                  <div class="gallery-placeholder-icon">📷</div>
+                  <div class="gallery-placeholder-num">1</div>
+                  <div class="gallery-placeholder-text">1.jpg</div>
+               </div>
+               <div class="gallery-item-overlay"><span class="gallery-item-label">Photo 1</span></div>
+            </div>
+            <div class="gallery-item" data-index="1">
+               <img src="2.jpg" alt="Photo 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+               <div class="gallery-placeholder" style="display:none">
+                  <div class="gallery-placeholder-icon">📷</div>
+                  <div class="gallery-placeholder-num">2</div>
+                  <div class="gallery-placeholder-text">2.jpg</div>
+               </div>
+               <div class="gallery-item-overlay"><span class="gallery-item-label">Photo 2</span></div>
+            </div>
+            <div class="gallery-item" data-index="2">
+               <img src="3.jpg" alt="Photo 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+               <div class="gallery-placeholder" style="display:none">
+                  <div class="gallery-placeholder-icon">📷</div>
+                  <div class="gallery-placeholder-num">3</div>
+                  <div class="gallery-placeholder-text">3.jpg</div>
+               </div>
+               <div class="gallery-item-overlay"><span class="gallery-item-label">Photo 3</span></div>
+            </div>
+            <div class="gallery-item" data-index="3">
+               <img src="4.jpg" alt="Photo 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+               <div class="gallery-placeholder" style="display:none">
+                  <div class="gallery-placeholder-icon">📷</div>
+                  <div class="gallery-placeholder-num">4</div>
+                  <div class="gallery-placeholder-text">4.jpg</div>
+               </div>
+               <div class="gallery-item-overlay"><span class="gallery-item-label">Photo 4</span></div>
+            </div>
+            <div class="gallery-item" data-index="4">
+               <img src="5.jpg" alt="Photo 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+               <div class="gallery-placeholder" style="display:none">
+                  <div class="gallery-placeholder-icon">📷</div>
+                  <div class="gallery-placeholder-num">5</div>
+                  <div class="gallery-placeholder-text">5.jpg</div>
+               </div>
+               <div class="gallery-item-overlay"><span class="gallery-item-label">Photo 5</span></div>
+            </div>
+            <div class="gallery-item" data-index="5">
+               <img src="6.jpg" alt="Photo 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+               <div class="gallery-placeholder" style="display:none">
+                  <div class="gallery-placeholder-icon">📷</div>
+                  <div class="gallery-placeholder-num">6</div>
+                  <div class="gallery-placeholder-text">6.jpg</div>
+               </div>
+               <div class="gallery-item-overlay"><span class="gallery-item-label">Photo 6</span></div>
+            </div>
+         </div>
+      </section>
+      <!-- LIGHTBOX -->
+      <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+         <div class="lightbox-inner">
+            <button class="lightbox-close" id="lightbox-close">✕</button>
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+            <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+            <div id="lightboxContent"></div>
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+         </div>
+      </div>
+      <!-- EQUITY -->
+      <section id="equity">
+         <div class="section-inner">
+            <div class="equity-content">
+               <div class="equity-left">
+                  <div class="section-label">Equity &amp; Inclusion</div>
+                  <h2>Microelectronics for Everyone</h2>
+                  <p>Tennessee students — regardless of ZIP code, background, or prior experience — deserve access to the careers shaping our future. ExLENT is built around this commitment. We actively partner with schools serving underrepresented populations and design every program element to remove barriers to participation.</p>
+               </div>
+               <div class="equity-pillars">
+                  <div class="equity-pillar">
+                     <div class="equity-pillar-icon">👧</div>
+                     <h4>Gender Inclusion</h4>
+                     <p>Intentional outreach and role modeling to encourage young women into microelectronics.</p>
+                  </div>
+                  <div class="equity-pillar">
+                     <div class="equity-pillar-icon">🌍</div>
+                     <h4>Rural Access</h4>
+                     <p>Priority partnerships with rural East Tennessee schools historically underserved by STEM programs.</p>
+                  </div>
+                  <div class="equity-pillar">
+                     <div class="equity-pillar-icon">🎨</div>
+                     <h4>STEAM Integration</h4>
+                     <p>E-textile and wearable projects bridge technology with creative and artistic learning.</p>
+                  </div>
+                  <div class="equity-pillar">
+                     <div class="equity-pillar-icon">🤝</div>
+                     <h4>Community Partnerships</h4>
+                     <p>Engaging local industry, community colleges, and school boards as program champions.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section id="team">
+         <div class="section-inner">
+            <div class="section-label">Program Leadership</div>
+            <h2>Meet the Team</h2>
+            <p class="section-lead">
+               ExLENT is led by a multidisciplinary team of University of Tennessee, Knoxville faculty spanning engineering education, electrical engineering, and microelectronics.
+            </p>
+            <div class="team-grid">
+               <!-- AYDENIZ -->
+               <div class="team-card reveal">
+                  <div class="team-card-top">
+                     <div class="team-initials">MA</div>
+                     <div class="team-name">Prof. Mehmet Aydeniz</div>
+                     <div class="team-role">Program Co-PI · Engineering Education</div>
+                  </div>
+                  <div class="team-card-body">
+                     <div class="team-dept">
+                        Engineering Education · University of Tennessee, Knoxville
+                     </div>
+                     <a href="mailto:maydeniz@utk.edu" style="
+                        color:#FF8200;
+                        font-weight:bold;
+                        text-decoration:none;
+                        ">
+                     maydeniz@utk.edu
+                     </a>
+                  </div>
+               </div>
+               <!-- FATHY -->
+               <div class="team-card reveal reveal-delay-1">
+                  <div class="team-card-top">
+                     <div class="team-initials">AF</div>
+                     <div class="team-name">Prof. Aly E. Fathy</div>
+                     <div class="team-role">Program Co-PI · RF & Microelectronics</div>
+                  </div>
+                  <div class="team-card-body">
+                     <div class="team-dept">
+                        Electrical Engineering & Computer Science · University of Tennessee, Knoxville
+                     </div>
+                     <a href="mailto:afathy@utk.edu" style="
+                        color:#FF8200;
+                        font-weight:bold;
+                        text-decoration:none;
+                        ">
+                     afathy@utk.edu
+                     </a>
+                  </div>
+               </div>
+               <!-- AZIZ -->
+               <div class="team-card reveal reveal-delay-2">
+                  <div class="team-card-top">
+                     <div class="team-initials">AA</div>
+                     <div class="team-name">Prof. Ahmedullah Aziz</div>
+                     <div class="team-role">Program Co-PI · Semiconductor Devices</div>
+                  </div>
+                  <div class="team-card-body">
+                     <div class="team-dept">
+                        Electrical Engineering & Computer Science · University of Tennessee, Knoxville
+                     </div>
+                     <a href="mailto:aziz@utk.edu" style="
+                        color:#FF8200;
+                        font-weight:bold;
+                        text-decoration:none;
+                        ">
+                     aziz@utk.edu
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- CONTACT -->
+      <section id="contact">
+         <div class="section-inner">
+         <div class="cta-wrap">
+            <div>
+               <div class="section-label">Get Involved</div>
+               <h2>Let's Build the Future Together</h2>
+               <p style="color:rgba(255,255,255,0.65);line-height:1.7;margin-top:18px;font-size:0.97rem;">ExLENT is expanding across East Tennessee. Whether you're a student ready to explore, a teacher eager to bring microelectronics to your classroom, or an administrator looking to partner — fill out our interest form and we'll be in touch.</p>
+               <!-- Interest Form Block -->
+               <div style="margin-top:32px;padding:24px 28px;background:rgba(255,130,0,0.07);border:1px solid rgba(255,130,0,0.3);border-left:4px solid var(--ut-orange);">
+                  <div style="font-family:'Oswald',sans-serif;color:var(--ut-orange);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;">Express Your Interest</div>
+                  <p style="color:rgba(255,255,255,0.65);font-size:0.88rem;line-height:1.6;margin-bottom:18px;">Ready to join ExLENT as a student, teacher, or school partner? Fill out our short interest form and a member of our team will follow up with next steps.</p>
+                  <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="btn-primary">Fill Out Interest Form</a>
+               </div>
+               <!-- Questions Block -->
+               <div class="contact-info-block">
+                  <div style="font-family:'Oswald',sans-serif;color:rgba(255,255,255,0.45);font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;">Have a Question? Reach Out Directly</div>
+                  <div class="contact-line">
+                     <span class="contact-icon">✉</span>
+                     <div class="contact-text">
+                        maydeniz@utk.edu &nbsp;·&nbsp; afathy@utk.edu &nbsp;·&nbsp; aziz@utk.edu
+                     </div>
+                  </div>
+                  <div class="contact-line">
+                     <span class="contact-icon">🏛</span>
+                     <div class="contact-text">Tickle College of Engineering · University of Tennessee, Knoxville · TN 37996</div>
+                  </div>
+                  <div class="contact-line">
+                     <span class="contact-icon">🌐</span>
+                     <div class="contact-text"><a href="https://www.utk.edu" target="_blank">www.utk.edu</a></div>
+                  </div>
+               </div>
+               <div class="cta-btns">
+                  <a href="mailto:maydeniz@utk.edu?subject=ExLENT%20Program%20Inquiry&body=Hello,%0D%0A%0D%0AI%20have%20a%20question%20about%20the%20ExLENT%20program.%0D%0A%0D%0AThank%20you." class="btn-outline" style="color:white;">Email Us a Question</a>
+                  <a href="https://www.utk.edu" target="_blank" class="btn-outline">Visit UTK.edu</a>
+               </div>
+            </div>
+            <div style="
+               background: linear-gradient(135deg, #0e0e0e, #1a1a1a);
+               border: 1px solid rgba(255,130,0,0.3);
+               border-radius: 16px;
+               padding: 30px;
+               text-align: center;
+               max-width: 320px;
+               margin: auto;
+               box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+               font-family: Arial, sans-serif;
+               ">
+               <h3 style="
+                  color: #FF8200;
+                  margin-bottom: 8px;
+                  font-size: 24px;
+                  ">
+                  Join ExLENT
+               </h3>
+               <p style="
+                  color: #ddd;
+                  font-size: 14px;
+                  margin-bottom: 20px;
+                  ">
+                  Scan to access the interest form
+               </p>
+               <div style="display:flex; flex-direction:column; align-items:center;">
+                  <!-- QR CODE -->
+                  <img 
+                     src="QR.jpg" 
+                     alt="ExLENT Interest Form QR Code"
+                     style="
+                     width:350px;
+                     height:350px;
+                     background:white;
+                     padding:10px;
+                     border-radius:12px;
+                     box-shadow:0 0 25px rgba(255,130,0,0.25);
+                     "
+                     >
+                  <p style="
+                     color:#bbb;
+                     font-size:12px;
+                     margin-top:10px;
+                     ">
+                     Scan with your phone
+                  </p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- FOOTER -->
+      <footer>
+         <div class="footer-left">
+            <div class="footer-logo">Ex<span>LENT</span> Program</div>
+            <div class="footer-sub">Engaging East Tennessee Educators in Microelectronics · University of Tennessee, Knoxville</div>
+         </div>
+         <div class="footer-right">
+            <div>© 2026 University of Tennessee, Knoxville · <a href="https://www.utk.edu" target="_blank">utk.edu</a></div>
+         </div>
+      </footer>
+      <script>
+         document.addEventListener('DOMContentLoaded', function() {
+         
+           // ── TABS ──────────────────────────────────────────────────────
+           document.querySelectorAll('.tab-btn').forEach(function(btn) {
+             btn.addEventListener('click', function() {
+               var id = btn.getAttribute('data-tab');
+               document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+               document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+               document.getElementById('tab-' + id).classList.add('active');
+               btn.classList.add('active');
+             });
+           });
+         
+           // ── LIGHTBOX ──────────────────────────────────────────────────
+           var photos = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'];
+           var labels  = ['Photo 1','Photo 2','Photo 3','Photo 4','Photo 5','Photo 6'];
+           var current = 0;
+           var lightbox = document.getElementById('lightbox');
+         
+           function renderLightbox() {
+             var n = current + 1;
+             document.getElementById('lightboxContent').innerHTML =
+               '<img src="' + photos[current] + '" alt="' + labels[current] + '" class="lightbox-img" ' +
+               'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+               '<div class="lightbox-ph" style="display:none">' +
+                 '<div class="lightbox-ph-num">' + n + '</div>' +
+                 '<div class="lightbox-ph-text">Image not found &nbsp;&middot;&nbsp; ' + photos[current] + '</div>' +
+               '</div>';
+             document.getElementById('lightboxCaption').textContent =
+               'ExLENT Program \u00b7 ' + labels[current] + ' \u00b7 ' + n + ' / ' + photos.length;
+           }
+         
+           function openLightbox(idx) {
+             current = idx;
+             renderLightbox();
+             lightbox.classList.add('open');
+             document.body.style.overflow = 'hidden';
+           }
+           function closeLightbox() {
+             lightbox.classList.remove('open');
+             document.body.style.overflow = '';
+           }
+           function changePhoto(dir) {
+             current = (current + dir + photos.length) % photos.length;
+             renderLightbox();
+           }
+         
+           document.querySelectorAll('.gallery-item').forEach(function(item) {
+             item.addEventListener('click', function() {
+               openLightbox(parseInt(item.getAttribute('data-index')));
+             });
+           });
+         
+           var btnClose = document.getElementById('lightbox-close');
+           var btnPrev  = document.getElementById('lightbox-prev');
+           var btnNext  = document.getElementById('lightbox-next');
+           if (btnClose) btnClose.addEventListener('click', closeLightbox);
+           if (btnPrev)  btnPrev.addEventListener('click',  function() { changePhoto(-1); });
+           if (btnNext)  btnNext.addEventListener('click',  function() { changePhoto(1);  });
+         
+           lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+         
+           document.addEventListener('keydown', function(e) {
+             if (!lightbox.classList.contains('open')) return;
+             if (e.key === 'ArrowRight') changePhoto(1);
+             if (e.key === 'ArrowLeft')  changePhoto(-1);
+             if (e.key === 'Escape')     closeLightbox();
+           });
+         
+           // ── ACTIVE NAV ────────────────────────────────────────────────
+           window.addEventListener('scroll', function() {
+             var cur = '';
+             document.querySelectorAll('section[id]').forEach(function(s) {
+               if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+             });
+             document.querySelectorAll('.nav-links a').forEach(function(a) {
+               var active = a.getAttribute('href') === '#' + cur;
+               if (!a.classList.contains('nav-cta')) {
+                 a.style.color      = active ? 'white' : 'rgba(255,255,255,0.75)';
+                 a.style.background = active ? 'rgba(255,130,0,0.1)' : '';
+               }
+             });
+           });
+         
+         });
+      </script>
+   </body>
+</html>
